@@ -250,8 +250,8 @@ class ClangFormatCommand(sublime_plugin.TextCommand):
                 region_offset = region.begin()
                 region_lenth  = region.size()
 
-            command.extend(['-offset', str(region_offset),
-                            '-length', str(region_length)])
+            command.extend(['-offset', str(len(self.view.substr(sublime.Region(0,region.begin())).encode(encoding))),
+                            '-length', str(len(self.view.substr(region).encode(encoding)))])
 
         # We only set the offset once, otherwise CF complains.
         command.extend(['-assume-filename', str(self.view.file_name())] )
